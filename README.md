@@ -81,10 +81,21 @@ After installing Chat With Code, you're just a few steps away from a conversatio
 
          ```sh
          cwc login \
+           --provider "azure" \
            --api-key=$API_KEY \
            --endpoint "https://your-endpoint.openai.azure.com/" \
            --deployment-name "gpt-4-turbo"
          ```
+
+         ```sh
+         # openai (compatible)
+         cwc login \
+           --provider "openai" \
+           --api-key=$API_KEY \
+           --endpoint "http://localhost:11434" \
+           --api-version "v1" \
+           --model "codellama"
+         ```     
 
    > **Security Notice**: Never input your API key directly into the command-line arguments to prevent potential exposure in shell history and process listings. The API key is securely stored in your personal keyring.
 
