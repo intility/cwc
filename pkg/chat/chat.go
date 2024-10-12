@@ -8,6 +8,7 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/intility/cwc/pkg/config"
 	"github.com/sashabaranov/go-openai"
 )
 
@@ -99,8 +100,15 @@ func (c *Conversation) Reply(message string) {
 }
 
 func (c *Conversation) processMessages(ctx context.Context) error {
+	provider := config.NewDefaultProvider()
+
+	cfg, err := provider.GetConfig()
+	if err != nil {
+		return fmt.Errorf("failed to get config from default provider: %w", err)
+	}
+
 	req := openai.ChatCompletionRequest{
-		Model:    openai.GPT4TurboPreview,
+		Model:    cfg.Model,
 		Messages: c.messages,
 		Stream:   true,
 	}

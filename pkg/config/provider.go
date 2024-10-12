@@ -186,10 +186,17 @@ func (c *DefaultProvider) NewFromConfigFile() (openai.ClientConfig, error) {
 		return openai.ClientConfig{}, err
 	}
 
-	config := openai.DefaultAzureConfig(cfg.APIKey(), cfg.Endpoint)
-	config.APIVersion = apiVersion
-	config.AzureModelMapperFunc = func(model string) string {
-		return cfg.ModelDeployment
+	var config openai.ClientConfig
+	if cfg.Provider == "azure" {
+		config = openai.DefaultAzureConfig(cfg.APIKey(), cfg.Endpoint)
+		config.APIVersion = cfg.ApiVersion
+		config.AzureModelMapperFunc = func(model string) string {
+			return cfg.ModelDeployment
+		}
+	}
+	if cfg.Provider == "openai" {
+		config = openai.DefaultConfig(cfg.apiKey)
+		config.BaseURL = cfg.Endpoint + "/" + cfg.ApiVersion
 	}
 
 	return config, nil
