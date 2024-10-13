@@ -8,8 +8,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/intility/cwc/pkg/config"
 	"github.com/sashabaranov/go-openai"
+
+	"github.com/intility/cwc/pkg/config"
 )
 
 type Chat struct {

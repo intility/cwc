@@ -19,6 +19,11 @@ type Provider interface {
 	ClearConfig() error
 }
 
+const (
+	providerAzure  = "azure"
+	providerOpenai = "openai"
+)
+
 type FileManager interface {
 	Read(path string) ([]byte, error)
 	Write(path string, content []byte, perm os.FileMode) error
@@ -187,16 +192,17 @@ func (c *DefaultProvider) NewFromConfigFile() (openai.ClientConfig, error) {
 	}
 
 	var config openai.ClientConfig
-	if cfg.Provider == "azure" {
+	if cfg.Provider == providerAzure {
 		config = openai.DefaultAzureConfig(cfg.APIKey(), cfg.Endpoint)
-		config.APIVersion = cfg.ApiVersion
+		config.APIVersion = cfg.APIVersion
 		config.AzureModelMapperFunc = func(model string) string {
 			return cfg.ModelDeployment
 		}
 	}
+
 	if cfg.Provider == "openai" {
 		config = openai.DefaultConfig(cfg.apiKey)
-		config.BaseURL = cfg.Endpoint + "/" + cfg.ApiVersion
+		config.BaseURL = cfg.Endpoint + "/" + cfg.APIVersion
 	}
 
 	return config, nil
