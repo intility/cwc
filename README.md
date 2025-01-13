@@ -137,8 +137,8 @@ The result output from cwc can also be piped to other commands as well. This exa
 
 ```sh
 # generate a commit message for current changes
-PROMPT="please write me a conventional commit for these changes"
-git diff HEAD | cwc $PROMPT | git commit -e --file -
+CWC_PROMPT="please write me a conventional commit for these changes"
+git diff HEAD | cwc $CWC_PROMPT | git commit -e --file -
 ```
 
 ## Configuration
