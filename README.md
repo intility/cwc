@@ -1,5 +1,7 @@
 # **C**hat **W**ith **C**ode
 
+> **This project is archived.** CWC was built in the early days of LLM-assisted development, when tool support for chatting with your codebase was limited. Since then, purpose-built solutions like [Claude Code](https://docs.anthropic.com/en/docs/claude-code), GitHub Copilot, Cursor, and others have matured well beyond what CWC offered. This repository is no longer maintained.
+
 <div align="center">
   <a href="https://github.com/intility/cwc">
     <img src="docs/assets/yelling_at_code.webp" alt="Logo">
